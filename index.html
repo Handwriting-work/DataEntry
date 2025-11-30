@@ -198,6 +198,53 @@
     }
   </script>
 
+<!-- WhatsApp Button -->
+<a id="whatsapp-float" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
+
+<style>
+  #whatsapp-float {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    z-index: 999;
+    transition: all 0.3s ease;
+  }
+  #whatsapp-float img {
+    width: 28px;
+    height: 28px;
+  }
+  #whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px rgba(37, 211, 102, 0.6);
+  }
+</style>
+
+<script>
+  // Fetch WhatsApp number from GitHub JSON file (10 digits only)
+  fetch("https://raw.githubusercontent.com/Handwriting-work/Whatsapp/main/whatsapp.json")
+    .then(res => res.json())
+    .then(data => {
+      const localNumber = data.number; // 10-digit number
+      const fullNumber = "91" + localNumber; // add country code +91
+      const btn = document.getElementById("whatsapp-float");
+      btn.href = `https://wa.me/${fullNumber}`;
+    })
+    .catch(() => {
+      // fallback number if file not found
+      document.getElementById("whatsapp-float").href = "https://wa.me/919999999999";
+    });
+</script>
+
 </body>
 
 </html>
